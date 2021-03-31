@@ -106,14 +106,14 @@ var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
 categoryAxis.dataFields.category = "category";
 categoryAxis.renderer.grid.template.location = 0;
 categoryAxis.renderer.inversed = true;
-categoryAxis.renderer.minGridDistance = 20;
+categoryAxis.renderer.minGridDistance = 25;
 categoryAxis.renderer.axisFills.template.disabled = false;
-categoryAxis.renderer.axisFills.template.fillOpacity = 0.05;
+categoryAxis.renderer.axisFills.template.fillOpacity = 0.15;
 
 
 var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-valueAxis.min = -100;
-valueAxis.max = 100;
+valueAxis.min = -60;
+valueAxis.max = 60;
 valueAxis.renderer.minGridDistance = 50;
 valueAxis.renderer.ticks.template.length = 5;
 valueAxis.renderer.ticks.template.disabled = false;
