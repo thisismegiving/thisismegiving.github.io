@@ -5,51 +5,99 @@ am4core.useTheme(am4themes_animated);
 // Themes end
 
 // Create chart instance
-var chart = am4core.create("chartdiv05", am4charts.XYChart);
+var chart = am4core.create("chartdiv03", am4charts.XYChart);
 
 // Title
 var title = chart.titles.push(new am4core.Label());
-title.text = "Research tools used by students";
+title.text = "Hong Kong Net Migration over the past 20 years";
 title.fontSize = 25;
 title.marginBottom = 15;
 
 // Add data
 chart.data = [{
-  "category": "Hong Konger",
-  "negative1": -0.1,
-  "negative2": -0.9,
-  "positive1": 5,
-  "positive2": 94
+  "category": "2021",
+  "negative1": -4.630,
+  "positive1": 3.485,
 }, {
-  "category": "Asais",
-  "negative1": -2,
-  "negative2": -4,
-  "positive1": 19,
-  "positive2": 75
+  "category": "2020",
+  "negative1": -4.420,
+  "positive1": 3.654,
 }, {
-  "category": "Global Citizen",
-  "negative1": -2,
-  "negative2": -10,
-  "positive1": 46,
-  "positive2": 42
+  "category": "2019",
+  "negative1": -4.230,
+  "positive1": 3.823,
 }, {
-  "category": "Member of Chinese race",
-  "negative1": -2,
-  "negative2": -13,
-  "positive1": 33,
-  "positive2": 52
+  "category": "2018",
+  "negative1": 10.370,
+  "positive1": 3.992,
 }, {
-  "category": "Chinese",
-  "negative1": -6,
-  "negative2": -19,
-  "positive1": 34,
-  "positive2": 41
+  "category": "2017",
+  "negative1": 11.570,
+  "positive1": 3.617,
 }, {
-  "category": "Chinese of PRC",
-  "negative1": -3,
-  "negative2": -23,
-  "positive1": 49,
-  "positive2": 25
+  "category": "2016",
+  "negative1": 13.080,
+  "positive1": 3.242,
+}, {
+  "category": "2015",
+  "negative1": 15.050,
+  "positive1": 2.867,
+}, {
+  "category": "2014",
+  "negative1": 17.710,
+  "positive1": 2.492,
+}, {
+  "category": "2013",
+  "negative1": -4.470,
+  "positive1": 2.117,
+}, {
+  "category": "2012",
+  "negative1": -4.320,
+  "positive1": 2.216,
+}, {
+  "category": "2011",
+  "negative1": -4.100,
+  "positive1": 2.316,
+}, {
+  "category": "2010",
+  "negative1": -3.980,
+  "positive1": 2.415,
+}, {
+  "category": "2009",
+  "negative1": -3.790,
+  "positive1": 2.515,
+}, {
+  "category": "2008",
+  "negative1": 5.450,
+  "positive1": 2.614,
+}, {
+  "category": "2007",
+  "negative1": 5.760,
+  "positive1": 2.479,
+}, {
+  "category": "2006",
+  "negative1": 6.160,
+  "positive1": 2.344,
+}, {
+  "category": "2005",
+  "negative1": 6.510,
+  "positive1": 2.208,
+}, {
+  "category": "2004",
+  "negative1": 6.970,
+  "positive1": 2.073,
+}, {
+  "category": "2003",
+  "negative1": -50.550,
+  "positive1": 1.938,
+}, {
+  "category": "2002",
+  "negative1": -33.570,
+  "positive1": 3.919,
+}, {
+  "category": "2001",
+  "negative1": -25.140,
+  "positive1": 5.899,
 }];
 
 
@@ -105,10 +153,8 @@ var interfaceColors = new am4core.InterfaceColorSet();
 var positiveColor = interfaceColors.getFor("positive");
 var negativeColor = interfaceColors.getFor("negative");
 
-createSeries("negative2", "Unlikely", negativeColor.lighten(0.5));
-createSeries("negative1", "Never", negativeColor);
-createSeries("positive1", "Sometimes", positiveColor.lighten(0.5));
-createSeries("positive2", "Very often", positiveColor);
+createSeries("negative1", "Growth Rate", negativeColor);
+createSeries("positive1", "Net Migration Rate", positiveColor.lighten(0.5));
 
 chart.legend.events.on("layoutvalidated", function(event){
   chart.legend.itemContainers.each((container)=>{

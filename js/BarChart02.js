@@ -5,7 +5,7 @@ am4core.ready(function() {
     // Themes end
     
     // Create chart instance
-    var chart = am4core.create("chartdiv04", am4charts.XYChart);
+    var chart = am4core.create("chartdiv02", am4charts.XYChart);
     
     // Add percent sign to all numbers
     chart.numberFormatter.numberFormat = "#.#'%'";
