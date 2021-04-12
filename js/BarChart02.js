@@ -12,13 +12,13 @@ am4core.ready(function() {
     
     // Add data
     chart.data = [{
-        "country": "Political disputes/\nVery annoying/\nSocial polarisation",
+        "country": "Political disputes/Very annoying/Social polarisation",
         "year2020": 23.6,
         "year2019": 27.9,
         "year2018": 25.7,
         "year2017": 31.1
     }, {
-        "country": "Not politically democratic/\nDissatisfied with political system",
+        "country": "Not politically democratic/Dissatisfied with political system",
         "year2020": 27.3,
         "year2019": 19.5,
         "year2018": 17.4,
@@ -30,7 +30,7 @@ am4core.ready(function() {
         "year2018": 25.6,
         "year2017": 21.8
     }, {
-        "country": "Bad Economic situation\n No economic future",
+        "country": "Bad Economic situation/No economic future",
         "year2020": 17.6,
         "year2019": 21.5,
         "year2018": 17.4,
@@ -40,12 +40,16 @@ am4core.ready(function() {
     // Create axes
     var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "country";
+    categoryAxis.renderer.labels.template.fontSize = 12;
+    categoryAxis.renderer.labels.template.maxWidth = 200;
+    categoryAxis.renderer.labels.template.wrap = true;
     categoryAxis.renderer.grid.template.location = 0;
     categoryAxis.renderer.minGridDistance = 10;
     
     var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.title.text = "Percentage";
+    valueAxis.title.text = "Percentage of Hong Kong people leaving";
     valueAxis.title.fontWeight = 500;
+   
     
     // Create series
     var series = chart.series.push(new am4charts.ColumnSeries());
@@ -57,18 +61,22 @@ am4core.ready(function() {
     var series2 = chart.series.push(new am4charts.ColumnSeries());
     series2.dataFields.valueY = "year2019";
     series2.dataFields.categoryX = "country";
+    series2.columns.template.fill = am4core.color("#C2C2C1");
+    
     series2.clustered = false;
     series2.tooltipText = "{categoryX} (2019): [bold]{valueY}[/]";
 
     var series2 = chart.series.push(new am4charts.ColumnSeries());
     series2.dataFields.valueY = "year2018";
     series2.dataFields.categoryX = "country";
+    series2.columns.template.fill = am4core.color("#F25F5C");
     series2.clustered = false;
     series2.tooltipText = "{categoryX} (2018): [bold]{valueY}[/]";
 
     var series2 = chart.series.push(new am4charts.ColumnSeries());
     series2.dataFields.valueY = "year2017";
     series2.dataFields.categoryX = "country";
+    series2.columns.template.fill = am4core.color("#FFE066");
     series2.clustered = false;
     series2.columns.template.width = am4core.percent(50);
     series2.tooltipText = "{categoryX} (2017): [bold]{valueY}[/]";

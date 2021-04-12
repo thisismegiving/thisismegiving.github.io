@@ -32,7 +32,7 @@ city.fill = chart.colors.getIndex(0).brighten(-0.2);
 city.strokeWidth = 2;
 city.stroke = am4core.color("#fff");
 
-function addCity(coords, title) {
+function addCity(coords, title ) {
     var city = cities.mapImages.create();
     city.latitude = coords.latitude;
     city.longitude = coords.longitude;
@@ -40,15 +40,13 @@ function addCity(coords, title) {
     return city;
 }
 
-var hk = addCity({ "latitude": 22.39711,"longitude": 114.11808 },"Hong Kong");
-var westerneurope = addCity({ "latitude": 50.71413,"longitude": 11.78787 },"Western Europe");
-var london = addCity({ "latitude": 51.5216,"longitude": -0.1343 },"London");
-var toronto = addCity({ "latitude": 43.8163, "longitude": -79.4287 }, "Toronto");
-var la = addCity({ "latitude": 34.3, "longitude": -118.15 }, "Los Angeles");
-var northamerica = addCity({ "latitude": 47.92, "longitude": -104.3136 }, "North America");
-var sydney = addCity({ "latitude": -33.8127,"longitude": 151.2284 }, "Sydney");
-var singapore = addCity({ "latitude": 1.36909,"longitude": 103.99141 }, "Singapore");
-var taiwan = addCity({ "latitude": 23.75156,"longitude": 120.96077 }, "Taiwan");
+var hk = addCity({ "latitude": 22.39711,"longitude": 114.11808,"value": 0 },"Hong Kong");
+var unitedkingdom = addCity({ "latitude": 51.5216,"longitude": -0.1343 },"United Kingdom: 23.9%");
+var canada = addCity({ "latitude": 43.8163, "longitude": -79.4287 }, "Canada: 9.3%");
+var unitedstates = addCity({ "latitude": 34.3, "longitude": -118.15 }, "United States: 5%");
+var australia = addCity({ "latitude": -33.8127,"longitude": 151.2284 }, "Australia: 11.6%");
+var singapore = addCity({ "latitude": 1.36909,"longitude": 103.99141}, "Singapore: 1.3%");
+var taiwan = addCity({ "latitude": 23.75156,"longitude": 120.96077 }, "Taiwan: 10.7");
 
 // Add lines
 var lineSeries = chart.series.push(new am4maps.MapArcSeries());
@@ -76,14 +74,13 @@ function addLine(from, to) {
     return line;
 }
 
-addLine(hk, westerneurope);
-addLine(westerneurope, london);
-addLine(london, toronto);
-addLine(toronto, la);
-addLine(la, northamerica);
-addLine(northamerica, sydney);
-addLine(sydney, singapore);
+addLine(hk, unitedkingdom);
+addLine(unitedkingdom, unitedstates);
+addLine(unitedstates, canada);
+addLine(canada, australia);
+addLine(australia, singapore);
 addLine(singapore, taiwan);
+
 
 // Add plane
 var plane = lineSeries.mapLines.getIndex(0).lineObjects.create();

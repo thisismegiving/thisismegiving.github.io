@@ -61,7 +61,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
   margin: 0;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -546,7 +546,7 @@ pre code {
 .container-lg,
 .container-md,
 .container-sm {
-  width: 100%;
+  width: 850px;
   padding-right: 0.75rem;
   padding-left: 0.75rem;
   margin-right: auto;
@@ -5982,6 +5982,10 @@ a.close.disabled {
   color: #fff;
   text-align: center;
 }
+.tales {
+  width: 100%;
+  height: 200px;
+}
 
 @-webkit-keyframes spinner-border {
   to {
@@ -10114,6 +10118,7 @@ img::-moz-selection {
     margin-right: 0;
   }
 }
+
 header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
@@ -10425,7 +10430,7 @@ header.masthead .masthead-heading {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
+  background-image: url("");
   background-repeat: no-repeat;
   background-position: center;
 }
