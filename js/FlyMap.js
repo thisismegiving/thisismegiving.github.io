@@ -46,7 +46,7 @@ var canada = addCity({ "latitude": 43.8163, "longitude": -79.4287 }, "Canada: 9.
 var unitedstates = addCity({ "latitude": 34.3, "longitude": -118.15 }, "United States: 5%");
 var australia = addCity({ "latitude": -33.8127,"longitude": 151.2284 }, "Australia: 11.6%");
 var singapore = addCity({ "latitude": 1.36909,"longitude": 103.99141}, "Singapore: 1.3%");
-var taiwan = addCity({ "latitude": 23.75156,"longitude": 120.96077 }, "Taiwan: 10.7");
+var taiwan = addCity({ "latitude": 23.75156,"longitude": 120.96077 }, "Taiwan: 10.7%");
 
 // Add lines
 var lineSeries = chart.series.push(new am4maps.MapArcSeries());
