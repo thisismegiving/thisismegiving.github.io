@@ -7,82 +7,126 @@ am4core.ready(function() {
     // Create chart instance
     var chart = am4core.create("chartdiv02", am4charts.XYChart);
     
-    // Add percent sign to all numbers
-    chart.numberFormatter.numberFormat = "#.#'%'";
-    
-    // Add data
-    chart.data = [{
-        "country": "Political disputes/Very annoying/Social polarisation",
-        "year2020": 23.6,
-        "year2019": 27.9,
-        "year2018": 25.7,
-        "year2017": 31.1
-    }, {
-        "country": "Not politically democratic/Dissatisfied with political system",
-        "year2020": 27.3,
-        "year2019": 19.5,
-        "year2018": 17.4,
-        "year2017": 17.2
-    }, {
-        "country": "Crowded living environment",
-        "year2020": 19.8,
-        "year2019": 19.1,
-        "year2018": 25.6,
-        "year2017": 21.8
-    }, {
-        "country": "Bad Economic situation/No economic future",
-        "year2020": 17.6,
-        "year2019": 21.5,
-        "year2018": 17.4,
-        "year2017": 15.5
-    }];
-    
     // Create axes
-    var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "country";
-    categoryAxis.renderer.labels.template.fontSize = 12;
-    categoryAxis.renderer.labels.template.maxWidth = 200;
-    categoryAxis.renderer.labels.template.wrap = true;
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 10;
+    var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+    xAxis.min = 0;
+    xAxis.strictMinMax = true;
+    xAxis.renderer.grid.template.disabled = true;
+    xAxis.renderer.labels.template.disabled = true;
     
-    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.title.text = "Percentage of Hong Kong people leaving";
-    valueAxis.title.fontWeight = 500;
-   
+    var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    yAxis.min = 0;
     
     // Create series
-    var series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.valueY = "year2020";
-    series.dataFields.categoryX = "country";
-    series.clustered = false;
-    series.tooltipText = "{categoryX} (2020: [bold]{valueY}[/]";
+    function createSeries(name, data) {
+      
+      // Create series itself
+      var series = chart.series.push(new am4charts.StepLineSeries());
+      series.dataFields.valueX = "ax";
+      series.dataFields.valueY = "ay";
+      series.strokeWidth = 3;
+      series.fillOpacity = 0.2;
+      series.stacked = true;
+      series.name = name;
+      series.data = data;
+      
+      // Create series for bullets
+      var bulletSeries = chart.series.push(new am4charts.ColumnSeries());
+      bulletSeries.dataFields.valueX = "ax";
+      bulletSeries.dataFields.valueY = "ay";
+      bulletSeries.stacked = true;
+      bulletSeries.fillOpacity = 0;
+      bulletSeries.hiddenInLegend = true;
     
-    var series2 = chart.series.push(new am4charts.ColumnSeries());
-    series2.dataFields.valueY = "year2019";
-    series2.dataFields.categoryX = "country";
-    series2.columns.template.fill = am4core.color("#C2C2C1");
+      var bullet = bulletSeries.bullets.push(new am4charts.LabelBullet);
+      bullet.label.text = "{valueY}";
+      bullet.label.truncate = false;
+      bullet.label.background.fill = am4core.color("#fff");
+      bullet.label.background.fillOpacity = 0.5;
+      bullet.label.padding(3, 6, 3, 6);
+      bullet.locationY = 0.5;
+      
+      var bulletSeriesData = [];
+      for(var i = 1; i < data.length; i++) {
+        bulletSeriesData.push({
+          "ax": data[i].ax - (data[i].ax - data[i-1].ax) / 2,
+          "ay": data[i-1].ay
+        })
+      }
+      bulletSeries.data = bulletSeriesData;
+      
+      // Save reference to related bullet series
+      series.dummyData = {
+        bulletSeries: bulletSeries
+      };
+      
+      // Set up events to hide/show related bullet series when series is toggled
+      series.events.on("hidden", function(ev) {
+        ev.target.dummyData.bulletSeries.hide();
+      });
+      
+      series.events.on("shown", function(ev) {
+        ev.target.dummyData.bulletSeries.show();
+      });
+      
+      return series;
+    }
     
-    series2.clustered = false;
-    series2.tooltipText = "{categoryX} (2019): [bold]{valueY}[/]";
-
-    var series2 = chart.series.push(new am4charts.ColumnSeries());
-    series2.dataFields.valueY = "year2018";
-    series2.dataFields.categoryX = "country";
-    series2.columns.template.fill = am4core.color("#F25F5C");
-    series2.clustered = false;
-    series2.tooltipText = "{categoryX} (2018): [bold]{valueY}[/]";
-
-    var series2 = chart.series.push(new am4charts.ColumnSeries());
-    series2.dataFields.valueY = "year2017";
-    series2.dataFields.categoryX = "country";
-    series2.columns.template.fill = am4core.color("#FFE066");
-    series2.clustered = false;
-    series2.columns.template.width = am4core.percent(50);
-    series2.tooltipText = "{categoryX} (2017): [bold]{valueY}[/]";
+    var series1 = createSeries(
+      "Hong Kong",
+      [
+        { "ax": 0, "ay": 6.50 },
+        { "ax": 30, "ay": 6.42},
+        { "ax": 40, "ay": 6.31 },
+        { "ax": 55, "ay": 6.15 },
+        { "ax": 80, "ay": 6.02 },
+        { "ax": 100, "ay": 5.57 }
+      ]
+    );
     
-    chart.cursor = new am4charts.XYCursor();
-    chart.cursor.lineX.disabled = true;
-    chart.cursor.lineY.disabled = true;
+    var series2 = createSeries(
+      "China",
+      [
+        { "ax": 0, "ay": 3.14 },
+        { "ax": 30, "ay": 3.14 },
+        { "ax": 40, "ay": 3.10 },
+        { "ax": 55, "ay": 3.32 },
+        { "ax": 80, "ay": 2.26 },
+        { "ax": 100, "ay": 2.27 }
+      ]
+    );
+    
+    var series3 = createSeries(
+      "Taiwan",
+      [
+        { "ax": 0, "ay": 7.83 },
+        { "ax": 30, "ay": 7.79 },
+        { "ax": 40, "ay": 7.73 },
+        { "ax": 55, "ay": 7.73 },
+        { "ax": 80, "ay": 7.73 },
+        { "ax": 100, "ay": 8.94 }
+      ]
+    );
+    
+    // Create labels
+    function createLabel(from, to, text) {
+      var range = xAxis.axisRanges.create();
+      range.value = from;
+      range.endValue = to;
+      range.label.text = text;
+      range.grid.location = 1;
+    }
+    
+    createLabel(0, 30, "2016");
+    createLabel(30, 40, "2017");
+    createLabel(40, 55, "2018");
+    createLabel(55, 80, "2019");
+    createLabel(80, 100, "2020");
+    
+    // Scrollbar
+    chart.scrollbarX = new am4core.Scrollbar();
+    
+    // Legend
+    chart.legend = new am4charts.Legend();
     
     }); // end am4core.ready()
