@@ -75,11 +75,11 @@ function addLine(from, to) {
 }
 
 addLine(hk, unitedkingdom);
-addLine(unitedkingdom, unitedstates);
-addLine(unitedstates, canada);
-addLine(canada, australia);
-addLine(australia, singapore);
-addLine(singapore, taiwan);
+addLine(hk, unitedstates);
+addLine(hk, canada);
+addLine(hk, australia);
+addLine(hk, singapore);
+addLine(hk, taiwan);
 
 
 // Add plane

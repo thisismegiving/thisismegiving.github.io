@@ -34,7 +34,7 @@ am4core.ready(function() {
   
   var series = chart.series.push(new am4charts.PieSeries());
   series.dataFields.value = "value";
-  series.dataFields.radiusValue = "value";
+  series.dataFields.radiusValue = "";
   series.dataFields.category = "country";
   series.slices.template.cornerRadius = 6;
   series.colors.step = 3;
